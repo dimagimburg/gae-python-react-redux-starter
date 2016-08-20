@@ -1,0 +1,22 @@
+html,body{
+    background: #191414;
+    margin: 0;
+    overflow: hidden;
+    height:100%;
+}
+
+#app{
+    height: 100%;
+}
+
+.full-height{
+    height: 100%;
+}
+
+.no-padding{
+    padding: 0;
+}
+
+.no-margin{
+    margin: 0;
+}
