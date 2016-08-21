@@ -58,14 +58,17 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     output: {
-        path: __dirname + '/dist',
-        publicPath: '/',
+        path: __dirname + '/dist/static',
+        publicPath: 'http://localhost:8080/static/js',
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: './dist',
+        contentBase: './dist/templates/admin',
         hot: true,
         historyApiFallback: true
+    },
+    proxy: {
+        '*': 'http://localhost:3000/static'
     },
     plugins: plugins
 };
