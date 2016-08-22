@@ -12,8 +12,8 @@ handlers:
 - url: /static
   static_dir: client/dist/static
 
-- url: .*
-  script: main.app
+- url: /
+  script: handlers.index.app
 
 libraries:
 - name: webapp2

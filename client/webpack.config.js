@@ -1,11 +1,13 @@
+var constants = require('../config.json');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 var plugins = [
     new webpack.ProvidePlugin({
         'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
-    new ExtractTextPlugin('app.css', {
+    new ExtractTextPlugin('../css/app.css', {
         allChunks: true
     }),
     new webpack.DefinePlugin({
@@ -15,7 +17,11 @@ var plugins = [
 
 var cssLoader = {};
 
-if(process.env.NODE_ENV == 'production'){
+var entry = [
+    './src/index.js'
+];
+
+if(process.env.NODE_ENV === 'production'){
     plugins.push(
         new webpack.optimize.UglifyJsPlugin()
     );
@@ -33,17 +39,18 @@ if(process.env.NODE_ENV == 'production'){
             'style?sourceMap',
             'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
         ]
-    }
+    };
+
+    entry = entry.concat([
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?' + constants.WEBPACK_DEV_SERVER_HOST + ':' + constants.WEBPACK_DEV_SERVER_PORT,
+        'webpack/hot/only-dev-server'
+    ]);
 
 }
 
 module.exports = {
-    entry: [
-        'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/only-dev-server',
-        './src/index.js'
-    ],
+    entry: entry,
     module: {
         loaders: [
             {
@@ -58,17 +65,13 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     output: {
-        path: __dirname + '/dist/static',
-        publicPath: 'http://localhost:8080/static/js',
+        path: __dirname + '/dist/static/js',
+        publicPath: constants.WEBPACK_DEV_SERVER_PORT + ':' + constants.WEBPACK_DEV_SERVER_PORT + '/static/js',
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: './dist/templates/admin',
-        hot: true,
+        //hot: true,
         historyApiFallback: true
-    },
-    proxy: {
-        '*': 'http://localhost:3000/static'
     },
     plugins: plugins
 };

@@ -2,3 +2,5 @@
 node_modules
 *.pyc
 npm-debug.log
+bundle.js
+app.css
