@@ -66,7 +66,7 @@ module.exports = {
     },
     output: {
         path: __dirname + '/dist/static/js',
-        publicPath: constants.WEBPACK_DEV_SERVER_PORT + ':' + constants.WEBPACK_DEV_SERVER_PORT + '/static/js',
+        publicPath: constants.WEBPACK_DEV_SERVER_HOST + ':' + constants.WEBPACK_DEV_SERVER_PORT + '/static/js',
         filename: 'bundle.js'
     },
     devServer: {
