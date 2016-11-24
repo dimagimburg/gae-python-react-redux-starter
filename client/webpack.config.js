@@ -40,12 +40,11 @@ if(process.env.NODE_ENV === 'production'){
             'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
         ]
     };
-
-    entry = entry.concat([
-        'react-hot-loader/patch',
+    var patch_should_be_first = ['react-hot-loader/patch'];
+    entry = patch_should_be_first.concat(entry.concat([
         'webpack-dev-server/client?' + constants.WEBPACK_DEV_SERVER_HOST + ':' + constants.WEBPACK_DEV_SERVER_PORT,
         'webpack/hot/only-dev-server'
-    ]);
+    ]));
 
 }
 
