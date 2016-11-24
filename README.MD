@@ -13,7 +13,7 @@ Run:
 1. cd client
 2. npm start
 3. run AppEngine server (usually from root directory run command: "dev_appserver.py --admin_port=9000 --port=3001" the google AppEngine SDK should be on the PATH and again make sure port is same as APP_ENGINE_DEV_SERVER_PORT in config.json file)
-4. open browser http://localhost:3001
+4. open browser http://localhost:[[APP_ENGINE_DEV_SERVER_PORT]] (change it to your port)
 5. the app should be running with no console errors and no 404s
 
 Deploy:
